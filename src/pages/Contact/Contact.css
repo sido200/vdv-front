@@ -278,6 +278,7 @@
 .social-link.twitter   { background: #1da1f2; }
 .social-link.linkedin  { background: #0a66c2; }
 .social-link.youtube   { background: #ff0000; }
+.social-link.tiktok    { background: #000000; }
 
 /* Responsive */
 @media (max-width: 1024px) {

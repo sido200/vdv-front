@@ -32,7 +32,7 @@ const TESTIMONIALS = [
     location: "Egypte",
     avatar: "AT",
     rating: 5,
-    text: "Bonjour,❤️ Je tiens à vous remercier du fond du cœur pour les merveilleux moments que j’ai pu vivre grâce à vos services. Chaque voyage organisé avec vous a été une expérience unique, pleine de découvertes, de détente et de souvenirs inoubliables. Votre professionnalisme, votre disponibilité et votre attention aux détails font vraiment la différence. Hâte de repartir bientôt à vos côtés pour de nouvelles aventures 🙏",
+    text: "Bonjour,❤️ Je tiens à vous remercier du fond du cœur pour les merveilleux moments que j'ai pu vivre grâce à vos services. Chaque voyage organisé avec vous a été une expérience unique, pleine de découvertes, de détente et de souvenirs inoubliables. Votre professionnalisme, votre disponibilité et votre attention aux détails font vraiment la différence. Hâte de repartir bientôt à vos côtés pour de nouvelles aventures 🙏",
   },
   {
     name: "imane Ouahib",
@@ -46,7 +46,7 @@ const TESTIMONIALS = [
     location: "Algerie",
     avatar: "AB",
     rating: 5,
-    text: "Bonjour à toute l’équipe, Un grand merci pour votre accompagnement et votre disponibilité. Mon voyage a été une réussite du début à la fin, et c’est en grande partie grâce à vous. Je garderai de très beaux souvenirs et je penserai à vous pour mes prochaines aventures ",
+    text: "Bonjour à toute l'équipe, Un grand merci pour votre accompagnement et votre disponibilité. Mon voyage a été une réussite du début à la fin, et c'est en grande partie grâce à vous. Je garderai de très beaux souvenirs et je penserai à vous pour mes prochaines aventures ",
   },
   {
     name: "Nadia Saidj",
@@ -64,6 +64,66 @@ const StarRating = ({ count }) => (
     ))}
   </div>
 );
+
+const TestimonialsCarousel = ({ testimonials }) => {
+  const [index, setIndex] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(4);
+
+  useEffect(() => {
+    const updateVisibleCount = () => {
+      const w = window.innerWidth;
+      if (w <= 600) setVisibleCount(1);
+      else if (w <= 1200) setVisibleCount(2);
+      else setVisibleCount(4);
+    };
+    updateVisibleCount();
+    window.addEventListener("resize", updateVisibleCount);
+    return () => window.removeEventListener("resize", updateVisibleCount);
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % testimonials.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [testimonials.length]);
+
+  const slideWidth = 100 / visibleCount;
+
+  return (
+    <div className="testimonials-carousel">
+      <div
+        className="testimonials-track"
+        style={{ transform: `translateX(-${index * slideWidth}%)` }}
+      >
+        {testimonials.concat(testimonials.slice(0, visibleCount)).map((t, i) => (
+          <div className="testimonial-slide" style={{ flex: `0 0 ${slideWidth}%` }} key={i}>
+            <div className="testimonial-card">
+              <StarRating count={t.rating} />
+              <p className="testimonial-text">"{t.text}"</p>
+              <div className="testimonial-author">
+                <div className="testimonial-avatar">{t.avatar}</div>
+                <div>
+                  <span className="testimonial-name">{t.name}</span>
+                  <span className="testimonial-location">{t.location}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="testimonials-dots">
+        {testimonials.map((_, i) => (
+          <button
+            key={i}
+            className={`testimonial-dot ${i === index ? "active" : ""}`}
+            onClick={() => setIndex(i)}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 const FAQItem = ({ question, answer, isOpen, onToggle }) => (
   <div className={`faq-item ${isOpen ? "open" : ""}`}>
@@ -182,7 +242,6 @@ const Accueil = () => {
     <div className="accueil-page">
       <section className="hero-form-section">
         <div className="hero-bg-wrapper">
-          {/* Slides */}
           {SLIDES.map((slide, i) => (
             <div
               key={i}
@@ -192,7 +251,6 @@ const Accueil = () => {
           ))}
           <div className="hero-overlay" />
 
-          {/* Texte centré */}
           <div className="hero-text-content">
             <div key={activeSlide} className="hero-text-inner">
               <span className="hero-badge-pill">Voyage Organisé</span>
@@ -201,11 +259,9 @@ const Accueil = () => {
             </div>
           </div>
 
-          {/* Carte blanche en bas du fond */}
           <div className="form-card">
             <div className="form-card-header">
               <h2 className="form-card-title">{t("home.hero.title")}</h2>
-           
             </div>
             <form onSubmit={handlePersoSubmit}>
               <div className="hero-form-row">
@@ -246,7 +302,6 @@ const Accueil = () => {
             </form>
           </div>
 
-          {/* Dots navigation */}
           <div className="slide-dots">
             {SLIDES.map((_, i) => (
               <button
@@ -312,21 +367,7 @@ const Accueil = () => {
             <span className="section-badge">Témoignages</span>
             <h2 className="section-title">Ce que disent nos voyageurs</h2>
           </div>
-          <div className="testimonials-grid">
-            {TESTIMONIALS.map((t, i) => (
-              <div className="testimonial-card" key={i}>
-                <StarRating count={t.rating} />
-                <p className="testimonial-text">"{t.text}"</p>
-                <div className="testimonial-author">
-                  <div className="testimonial-avatar">{t.avatar}</div>
-                  <div>
-                    <span className="testimonial-name">{t.name}</span>
-                    <span className="testimonial-location">{t.location}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <TestimonialsCarousel testimonials={TESTIMONIALS} />
         </div>
       </section>
 

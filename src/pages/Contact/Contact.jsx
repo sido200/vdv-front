@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import Swal from "sweetalert2";
-import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube, FaTwitter } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube, FaTwitter, FaTiktok } from "react-icons/fa";
 import "./Contact.css";
 import { PostContactB2B, PostContactB2C } from "../../services/contact";
 
@@ -179,13 +179,14 @@ const Contact = () => {
 
           <div className="contact-socials">
             <h3 className="socials-title">Suivez-nous</h3>
-            <div className="socials-row">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="social-link facebook"><FaFacebook /></a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="social-link instagram"><FaInstagram /></a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="social-link twitter"><FaTwitter /></a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-link linkedin"><FaLinkedin /></a>
-              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="social-link youtube"><FaYoutube /></a>
-            </div>
+          <div className="socials-row">
+  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="social-link facebook"><FaFacebook /></a>
+  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="social-link instagram"><FaInstagram /></a>
+  <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="social-link twitter"><FaTwitter /></a>
+  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-link linkedin"><FaLinkedin /></a>
+  <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="social-link youtube"><FaYoutube /></a>
+  <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="social-link tiktok"><FaTiktok /></a>
+</div>
           </div>
         </div>
       </div>

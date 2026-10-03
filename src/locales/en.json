@@ -196,13 +196,15 @@
       "subtitle": "Enjoy preferential rates for your children and tailored activities.",
       "cta": "Discover offers"
     },
-    "faq": {
+"faq": {
       "badge": "Help",
       "title": "Frequently Asked Questions",
       "items": [
         { "q": "How can I book a trip?", "a": "Select your destination, choose your dates, and click book to finalize your payment." },
         { "q": "Do I have to pay the full amount immediately?", "a": "No, a deposit is possible depending on the specific conditions of each trip." },
-        { "q": "What is a custom trip?", "a": "It is a tailor-made offer where you define your budget and preferences, and we create the itinerary for you." }
+        { "q": "What is a custom trip?", "a": "It is a tailor-made offer where you define your budget and preferences, and we create the itinerary for you." },
+        { "q": "Can I cancel or change my booking?", "a": "Yes, cancellation and changes are possible depending on the conditions of each trip. Contact our team for the exact terms." },
+        { "q": "Are flights and accommodation included in the price?", "a": "It depends on the package chosen. Each trip clearly states what is included (flight, hotel, transfers, activities) before booking." }
       ]
     },
     "alerts": {

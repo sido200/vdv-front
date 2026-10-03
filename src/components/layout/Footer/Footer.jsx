@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube, FaTwitter } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube, FaTwitter, FaTiktok } from "react-icons/fa";
 import "./Footer.css";
 import Background from "../../../assets/images/Herobackground.jpg";
 
@@ -38,6 +38,7 @@ export default function Footer() {
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="footer-social-link"><FaTwitter /></a>
               <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="footer-social-link"><FaLinkedin /></a>
               <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="footer-social-link"><FaYoutube /></a>
+              <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="footer-social-link"><FaTiktok /></a>
             </div>
           </div>
 

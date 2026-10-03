@@ -196,13 +196,15 @@
       "subtitle": "Profitez de tarifs préférentiels pour vos enfants et des activités adaptées.",
       "cta": "Découvrir les offres"
     },
-    "faq": {
+ "faq": {
       "badge": "Aide",
       "title": "Questions fréquentes",
       "items": [
         { "q": "Comment puis-je réserver un voyage ?", "a": "Sélectionnez votre destination, choisissez vos dates et cliquez sur réserver pour finaliser votre paiement." },
         { "q": "Dois-je payer la totalité immédiatement ?", "a": "Non, un acompte est possible selon les conditions spécifiques de chaque voyage." },
-        { "q": "Qu'est-ce qu'un voyage personnalisé ?", "a": "C'est une offre sur mesure où vous définissez votre budget et vos préférences, et nous créons l'itinéraire pour vous." }
+        { "q": "Qu'est-ce qu'un voyage personnalisé ?", "a": "C'est une offre sur mesure où vous définissez votre budget et vos préférences, et nous créons l'itinéraire pour vous." },
+        { "q": "Puis-je annuler ou modifier ma réservation ?", "a": "Oui, l'annulation et la modification sont possibles selon les conditions de chaque voyage. Contactez notre équipe pour connaître les modalités exactes." },
+        { "q": "Le vol et l'hébergement sont-ils inclus dans le prix ?", "a": "Cela dépend de l'offre choisie. Chaque voyage précise clairement ce qui est inclus (vol, hôtel, transferts, activités) avant la réservation." }
       ]
     },
     "alerts": {
