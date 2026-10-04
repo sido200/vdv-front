@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import "./SignIn.css";
 import { FcGoogle } from "react-icons/fc";
 
-const STRAPI_URL = "http://localhost:1337";
+const STRAPI_URL = import.meta.env.VITE_STRAPI_URL;
 
 const Login = () => {
   const { t } = useTranslation();

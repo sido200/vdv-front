@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import Swal from "sweetalert2";
-import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube, FaTwitter, FaTiktok } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
 import "./Contact.css";
 import { PostContactB2B, PostContactB2C } from "../../services/contact";
 
@@ -152,7 +152,7 @@ const Contact = () => {
           <div className="info-map">
             <iframe
               title="Localisation Village des Voyages"
-              src="https://maps.google.com/maps?q=Cheraga,Alger,Algeria&output=embed"
+              src="https://maps.google.com/maps?q=36.7630748,2.9607064&z=17&output=embed"
               allowFullScreen
               loading="lazy"
             />
@@ -165,27 +165,27 @@ const Contact = () => {
             </div>
             <div className="info-card">
               <h3>{t("contact.info.phone")}</h3>
-              <p>021 37 17 05<br />021 37 32 78</p>
+              <p>
+                <a href="tel:+21321371705">021 37 17 05</a><br />
+                <a href="tel:+21321373278">021 37 32 78</a>
+              </p>
             </div>
             <div className="info-card">
               <h3>{t("contact.info.email")}</h3>
-              <p>contact@villagedevoyage.dz</p>
+              <p><a href="mailto:contact@villagedesvoyages.com">contact@villagedesvoyages.com</a></p>
             </div>
             <div className="info-card">
               <h3>{t("contact.info.hours")}</h3>
-              <p>{t("contact.info.hours_val")}<br />{t("footer.company.saturday", "Samedi : 09h00 - 13h00")}</p>
+              <p>{t("contact.info.hours_val")}<br />{t("footer.company.saturday")}</p>
             </div>
           </div>
 
           <div className="contact-socials">
             <h3 className="socials-title">Suivez-nous</h3>
           <div className="socials-row">
-  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="social-link facebook"><FaFacebook /></a>
-  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="social-link instagram"><FaInstagram /></a>
-  <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="social-link twitter"><FaTwitter /></a>
-  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-link linkedin"><FaLinkedin /></a>
-  <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="social-link youtube"><FaYoutube /></a>
-  <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="social-link tiktok"><FaTiktok /></a>
+  <a href="https://www.facebook.com/VillageDesVoyages/" target="_blank" rel="noopener noreferrer" className="social-link facebook" aria-label="Facebook"><FaFacebook /></a>
+  <a href="https://www.instagram.com/village_des_voyages/" target="_blank" rel="noopener noreferrer" className="social-link instagram" aria-label="Instagram"><FaInstagram /></a>
+  <a href="https://www.tiktok.com/@village_des_voyages" target="_blank" rel="noopener noreferrer" className="social-link tiktok" aria-label="TikTok"><FaTiktok /></a>
 </div>
           </div>
         </div>

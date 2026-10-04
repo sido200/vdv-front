@@ -95,7 +95,15 @@
       "location": "Our Location",
       "about": "About Us",
       "careers": "Careers",
-      "contact": "Contact"
+      "contact": "Contact",
+      "saturday": "Saturday: 09:00 AM - 01:00 PM",
+      "business": "Corporate offers"
+    },
+    "trips": {
+      "title": "Trips",
+      "international": "Trips abroad",
+      "algeria": "Trips in Algeria",
+      "custom": "Custom trip"
     },
     "legal": {
       "title": "Legal",
@@ -437,13 +445,20 @@
       "error_title": "Error",
       "error_text": "Could not save your information. Please try again."
     }
+  },
+  "reset": {
+    "title": "New password",
+    "subtitle": "Choose a new password for your account.",
+    "new_password": "New password",
+    "confirm_password": "Confirm password",
+    "submit": "Save",
+    "loading": "Saving...",
+    "success": "Password changed, you are now logged in!",
+    "back_to_login": "Back to login",
+    "errors": {
+      "mismatch": "Passwords do not match.",
+      "invalid": "Invalid or expired link. Please request a new reset.",
+      "no_code": "Incomplete link. Use the link received by email."
+    }
   }
-
-
-
-
-
-
-
-
 }

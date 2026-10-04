@@ -222,6 +222,15 @@
   margin-left: -10px;
 }
 
+.info-card a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.info-card a:hover {
+  text-decoration: underline;
+}
+
 /* Google Map */
 .info-map {
   border-radius: 1.5rem;

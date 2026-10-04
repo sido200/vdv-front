@@ -95,7 +95,15 @@
       "location": "Localisation",
       "about": "À propos de nous",
       "careers": "Carrière",
-      "contact": "Contact"
+      "contact": "Contact",
+      "saturday": "Samedi : 09h00 - 13h00",
+      "business": "Offres entreprises"
+    },
+    "trips": {
+      "title": "Voyages",
+      "international": "Voyages à l'étranger",
+      "algeria": "Voyages en Algérie",
+      "custom": "Voyage personnalisé"
     },
     "legal": {
       "title": "Légal",
@@ -437,13 +445,20 @@
       "error_title": "Erreur",
       "error_text": "Impossible d'enregistrer vos informations. Veuillez réessayer."
     }
+  },
+  "reset": {
+    "title": "Nouveau mot de passe",
+    "subtitle": "Choisissez un nouveau mot de passe pour votre compte.",
+    "new_password": "Nouveau mot de passe",
+    "confirm_password": "Confirmer le mot de passe",
+    "submit": "Enregistrer",
+    "loading": "Enregistrement...",
+    "success": "Mot de passe modifié, vous êtes connecté !",
+    "back_to_login": "Retour à la connexion",
+    "errors": {
+      "mismatch": "Les mots de passe ne correspondent pas.",
+      "invalid": "Lien invalide ou expiré. Refaites une demande de réinitialisation.",
+      "no_code": "Lien incomplet. Utilisez le lien reçu par email."
+    }
   }
-
-
-
-
-
-
-
-  
 }

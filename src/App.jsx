@@ -15,8 +15,10 @@ import Register from "./pages/Auth/Register/Register.jsx";
 import Entreprise from "./pages/Entreprise/Entreprise.jsx";
 import Details from "./pages/Details/Details.jsx";
 import GoogleCallback from "./pages/Auth/GoogleCallback/GoogleCallback.jsx";
+import ResetPassword from "./pages/Auth/ResetPassword/ResetPassword.jsx";
 import CompleteProfile from "./pages/CompleteProfile/CompleteProfile.jsx";
 import ScrollToTop from "./components/layout/ScrollToTop/ScrollToTop.jsx";
+import RevealOnScroll from "./components/layout/RevealOnScroll/RevealOnScroll.jsx";
 import NosVoyagesDz from "./pages/NosVoyagesDz/NosVoyagesDz.jsx";
 
 function App() {
@@ -24,6 +26,7 @@ function App() {
     <BrowserRouter>
       {/* On place ScrollToTop ici pour qu'il surveille la navigation */}
       <ScrollToTop />
+      <RevealOnScroll />
 
       <Routes>
         <Route element={<Layout />}>
@@ -42,6 +45,7 @@ function App() {
         <Route path="/complete-profile" element={<CompleteProfile />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
       </Routes>
     </BrowserRouter>
   );

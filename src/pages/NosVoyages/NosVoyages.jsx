@@ -17,7 +17,7 @@ import {
 import { Link } from "react-router-dom";
 
 const BASE_URL = import.meta.env.VITE_API_LINK;
-const STRAPI_URL = "http://localhost:1337";
+const STRAPI_URL = import.meta.env.VITE_STRAPI_URL;
 
 const RangeFilter = ({
   label,

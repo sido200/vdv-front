@@ -7,13 +7,16 @@ import "./Accueil.css";
 
 // ASSETS
 
-import Discount from "../../assets/images/images.jfif";
+import Discount1 from "../../assets/images/local (1).jpg";
+import Discount2 from "../../assets/images/local (2).jpg";
+import Discount3 from "../../assets/images/local (3).jpg";
+import Discount4 from "../../assets/images/local (4).jpg";
 
 // SERVICES
 import { GetVoyage2 } from "../../services/voyages";
 import { Perso } from "../../services/perso";
 
-const STRAPI_URL = "http://localhost:1337";
+const STRAPI_URL = import.meta.env.VITE_STRAPI_URL;
 
 const SLIDES = [
   {
@@ -485,18 +488,18 @@ const Accueil = () => {
             <div className="family-scroll-track">
               {/* Premier groupe de 4 images (grid 2x2) */}
               <div className="family-grid">
-                <img src={Discount} alt="Promo 1" className="scroll-img" />
-                <img src={Discount} alt="Promo 2" className="scroll-img" />
-                <img src={Discount} alt="Promo 3" className="scroll-img" />
-                <img src={Discount} alt="Promo 4" className="scroll-img" />
+                <img src={Discount1} alt="Promo 1" className="scroll-img" />
+                <img src={Discount2} alt="Promo 2" className="scroll-img" />
+                <img src={Discount3} alt="Promo 3" className="scroll-img" />
+                <img src={Discount4} alt="Promo 4" className="scroll-img" />
               </div>
 
               {/* Deuxième groupe identique pour assurer la boucle fluide */}
               <div className="family-grid" aria-hidden="true">
-                <img src={Discount} alt="Promo 1" className="scroll-img" />
-                <img src={Discount} alt="Promo 2" className="scroll-img" />
-                <img src={Discount} alt="Promo 3" className="scroll-img" />
-                <img src={Discount} alt="Promo 4" className="scroll-img" />
+                <img src={Discount1} alt="Promo 1" className="scroll-img" />
+                <img src={Discount2} alt="Promo 2" className="scroll-img" />
+                <img src={Discount3} alt="Promo 3" className="scroll-img" />
+                <img src={Discount4} alt="Promo 4" className="scroll-img" />
               </div>
             </div>
           </div>
@@ -513,7 +516,7 @@ const Accueil = () => {
         </div>
       </section>
 
-      <section className="faq-section">
+      <section className="faq-section" id="faq">
         <div className="faq-container">
           <div className="faq-header">
             <span className="faq-badge">{t("home.faq.badge")}</span>

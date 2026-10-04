@@ -7,6 +7,8 @@ import Swal from "sweetalert2";
 import "./Register.css";
 import { FcGoogle } from "react-icons/fc";
 
+const STRAPI_URL = import.meta.env.VITE_STRAPI_URL;
+
 const Register = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -46,7 +48,7 @@ const Register = () => {
 
     try {
       // ÉTAPE 1 : Inscription
-      const registerResponse = await axios.post("https://trio-each-helicopter-feeling.trycloudflare.com/api/auth/local/register", {
+      const registerResponse = await axios.post(`${STRAPI_URL}/api/auth/local/register`, {
         username: email.toLowerCase().trim(),
         email: email.toLowerCase().trim(),
         password: password,
@@ -56,7 +58,7 @@ const Register = () => {
 
       // ÉTAPE 2 : Mise à jour du champ 'phone'
       await axios.put(
-        `https://trio-each-helicopter-feeling.trycloudflare.com/api/users/${user.id}`,
+        `${STRAPI_URL}/api/users/${user.id}`,
         { phone: String(phone).trim() },
         {
           headers: {
@@ -89,7 +91,7 @@ const Register = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = "https://trio-each-helicopter-feeling.trycloudflare.com/api/connect/google";
+    window.location.href = `${STRAPI_URL}/api/connect/google`;
   };
 
   return (

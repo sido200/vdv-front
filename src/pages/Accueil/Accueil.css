@@ -738,13 +738,21 @@
     black 85%,
     transparent
   );
+  /* Inclinaison 3D stylée */
+  transform: perspective(1400px) rotateX(10deg) rotateY(-14deg) rotateZ(6deg);
+  transform-origin: center;
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Piste de défilement */
+/* Se redresse légèrement au survol */
+.family-scroll-wrapper:hover {
+  transform: perspective(1400px) rotateX(5deg) rotateY(-7deg) rotateZ(3deg);
+}
+
+/* Piste de défilement (padding au lieu de gap => boucle -50% parfaite) */
 .family-scroll-track {
   display: flex;
   flex-direction: column;
-  gap: 16px;
   animation: scrollVertical 20s linear infinite;
 }
 
@@ -757,16 +765,29 @@
 .family-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  gap: 18px;
+  padding-bottom: 18px;
 }
 
 /* Style des images */
 .scroll-img {
   width: 100%;
-  height: 200px;
+  height: 220px;
   object-fit: cover;
-  border-radius: 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border-radius: 22px;
+  border: 4px solid #fff;
+ 
+  transition: scale 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Colonne de droite décalée (effet mosaïque) */
+.scroll-img:nth-child(even) {
+  translate: 0 50px;
+}
+
+.scroll-img:hover {
+  scale: 1.05;
+  box-shadow: 0 24px 50px rgba(21, 25, 54, 0.28);
 }
 
 /* Animation d'Infinite Scroll */
@@ -812,6 +833,20 @@
 
   .family-image {
     border-radius: 24px;
+  }
+
+  .family-scroll-wrapper,
+  .family-scroll-wrapper:hover {
+    transform: rotateZ(3deg);
+    max-height: 380px;
+  }
+
+  .scroll-img {
+    height: 150px;
+  }
+
+  .scroll-img:nth-child(even) {
+    translate: 0 30px;
   }
 }
 
