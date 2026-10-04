@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import qs from "qs";
-import "./NosVoyages.css";
 
 import {
   FiCalendar,
@@ -48,7 +47,7 @@ const RangeFilter = ({
   </div>
 );
 
-const NosVoyages = () => {
+const NosVoyagesDz = () => {
   const { t, i18n } = useTranslation();
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -70,7 +69,7 @@ const NosVoyages = () => {
           filters: {
             $and: [
               {
-                $or: [{ local: { $eq: false } }, { local: { $null: true } }],
+                $or: [{ local: { $eq: true } }, { local: { $null: true } }],
               },
               ...(searchName ? [{ name: { $contains: searchName } }] : []),
               { price: { $lte: maxPrice } },
@@ -313,4 +312,4 @@ const NosVoyages = () => {
   );
 };
 
-export default NosVoyages;
+export default NosVoyagesDz;

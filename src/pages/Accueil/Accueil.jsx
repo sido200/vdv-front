@@ -6,24 +6,71 @@ import Swal from "sweetalert2";
 import "./Accueil.css";
 
 // ASSETS
-import Discount from "../../assets/images/Discount.png";
+
+import Discount from "../../assets/images/images.jfif";
 
 // SERVICES
 import { GetVoyage2 } from "../../services/voyages";
 import { Perso } from "../../services/perso";
 
-const STRAPI_URL = "https://purple-womens-widely-subjects.trycloudflare.com";
+const STRAPI_URL = "http://localhost:1337";
 
 const SLIDES = [
-  { image: "https://images.pexels.com/photos/71241/pexels-photo-71241.jpeg?auto=compress&w=1600",  country: "Égypte",      tagline: "Sur les traces des pharaons, entre histoire éternelle et Nil majestueux." },
-  { image: "https://images.pexels.com/photos/236294/pexels-photo-236294.jpeg?auto=compress&w=1600", country: "Russie",      tagline: "De Moscou à Saint-Pétersbourg, une épopée impériale sans fin." },
-  { image: "https://images.pexels.com/photos/11974783/pexels-photo-11974783.jpeg?auto=compress&w=1600", country: "Djanet",      tagline: "Le Sahara dans sa pureté absolue, entre dunes et art rupestre." },
-  { image: "https://images.pexels.com/photos/2174656/pexels-photo-2174656.jpeg?auto=compress&w=1600",  country: "Vietnam",     tagline: "Des rizières aux baies mythiques, un voyage d'émotions infinies." },
-  { image: "https://images.pexels.com/photos/9336144/pexels-photo-9336144.jpeg?auto=compress&w=1600",  country: "Timimoun",    tagline: "L'oasis rouge du désert, un mirage vivant au cœur du Sahara." },
-  { image: "https://images.pexels.com/photos/186457/pexels-photo-186457.jpeg?auto=compress&w=1600",    country: "Azerbaïdjan", tagline: "Entre feu et modernité, la perle du Caucase inattendue." },
-  { image: "https://images.pexels.com/photos/1287460/pexels-photo-1287460.jpeg?auto=compress&w=1600",country: "Maldives",    tagline: "Le paradis sur eau turquoise, luxe et sérénité à l'infini." },
-  { image: "https://images.pexels.com/photos/931018/pexels-photo-931018.jpeg?auto=compress&w=1600",  country: "Bali",        tagline: "Slow life, vibes tropicales et énergie spirituelle." },
-  { image: "https://images.pexels.com/photos/27118625/pexels-photo-27118625.jpeg?auto=compress&w=1600", country: "Malaisie",    tagline: "L'Asie moderne, vibrante et multiculturelle." },
+  {
+    image:
+      "https://images.pexels.com/photos/71241/pexels-photo-71241.jpeg?auto=compress&w=1600",
+    country: "Égypte",
+    tagline:
+      "Sur les traces des pharaons, entre histoire éternelle et Nil majestueux.",
+  },
+  {
+    image:
+      "https://images.pexels.com/photos/236294/pexels-photo-236294.jpeg?auto=compress&w=1600",
+    country: "Russie",
+    tagline: "De Moscou à Saint-Pétersbourg, une épopée impériale sans fin.",
+  },
+  {
+    image:
+      "https://images.pexels.com/photos/11974783/pexels-photo-11974783.jpeg?auto=compress&w=1600",
+    country: "Djanet",
+    tagline: "Le Sahara dans sa pureté absolue, entre dunes et art rupestre.",
+  },
+  {
+    image:
+      "https://images.pexels.com/photos/2174656/pexels-photo-2174656.jpeg?auto=compress&w=1600",
+    country: "Vietnam",
+    tagline: "Des rizières aux baies mythiques, un voyage d'émotions infinies.",
+  },
+  {
+    image:
+      "https://images.pexels.com/photos/9336144/pexels-photo-9336144.jpeg?auto=compress&w=1600",
+    country: "Timimoun",
+    tagline: "L'oasis rouge du désert, un mirage vivant au cœur du Sahara.",
+  },
+  {
+    image:
+      "https://images.pexels.com/photos/186457/pexels-photo-186457.jpeg?auto=compress&w=1600",
+    country: "Azerbaïdjan",
+    tagline: "Entre feu et modernité, la perle du Caucase inattendue.",
+  },
+  {
+    image:
+      "https://images.pexels.com/photos/1287460/pexels-photo-1287460.jpeg?auto=compress&w=1600",
+    country: "Maldives",
+    tagline: "Le paradis sur eau turquoise, luxe et sérénité à l'infini.",
+  },
+  {
+    image:
+      "https://images.pexels.com/photos/931018/pexels-photo-931018.jpeg?auto=compress&w=1600",
+    country: "Bali",
+    tagline: "Slow life, vibes tropicales et énergie spirituelle.",
+  },
+  {
+    image:
+      "https://images.pexels.com/photos/27118625/pexels-photo-27118625.jpeg?auto=compress&w=1600",
+    country: "Malaisie",
+    tagline: "L'Asie moderne, vibrante et multiculturelle.",
+  },
 ];
 
 const TESTIMONIALS = [
@@ -96,21 +143,27 @@ const TestimonialsCarousel = ({ testimonials }) => {
         className="testimonials-track"
         style={{ transform: `translateX(-${index * slideWidth}%)` }}
       >
-        {testimonials.concat(testimonials.slice(0, visibleCount)).map((t, i) => (
-          <div className="testimonial-slide" style={{ flex: `0 0 ${slideWidth}%` }} key={i}>
-            <div className="testimonial-card">
-              <StarRating count={t.rating} />
-              <p className="testimonial-text">"{t.text}"</p>
-              <div className="testimonial-author">
-                <div className="testimonial-avatar">{t.avatar}</div>
-                <div>
-                  <span className="testimonial-name">{t.name}</span>
-                  <span className="testimonial-location">{t.location}</span>
+        {testimonials
+          .concat(testimonials.slice(0, visibleCount))
+          .map((t, i) => (
+            <div
+              className="testimonial-slide"
+              style={{ flex: `0 0 ${slideWidth}%` }}
+              key={i}
+            >
+              <div className="testimonial-card">
+                <StarRating count={t.rating} />
+                <p className="testimonial-text">"{t.text}"</p>
+                <div className="testimonial-author">
+                  <div className="testimonial-avatar">{t.avatar}</div>
+                  <div>
+                    <span className="testimonial-name">{t.name}</span>
+                    <span className="testimonial-location">{t.location}</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
       <div className="testimonials-dots">
         {testimonials.map((_, i) => (
@@ -131,12 +184,20 @@ const FAQItem = ({ question, answer, isOpen, onToggle }) => (
       <span className="question-text">{question}</span>
       <span className={`faq-icon ${isOpen ? "rotated" : ""}`}>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path
+            d="M6 9L12 15L18 9"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
       </span>
     </button>
     <div className="faq-answer-wrapper">
-      <div className="faq-answer"><p>{answer}</p></div>
+      <div className="faq-answer">
+        <p>{answer}</p>
+      </div>
     </div>
   </div>
 );
@@ -146,17 +207,17 @@ const Accueil = () => {
   const navigate = useNavigate();
   const [openFAQIndex, setOpenFAQIndex] = useState(0);
   const [destinations, setDestinations] = useState([]);
-  
+
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
-    Destination: "", 
-    nbr: 1, 
-    date: "", 
-    budget: ""
+    Destination: "",
+    nbr: 1,
+    date: "",
+    budget: "",
   });
 
   const [activeSlide, setActiveSlide] = useState(0);
@@ -180,7 +241,9 @@ const Accueil = () => {
       .then((res) => {
         const newData = res.data.data;
         const meta = res.data.meta.pagination;
-        setDestinations(prev => (pageNum === 1 ? newData : [...prev, ...newData]));
+        setDestinations((prev) =>
+          pageNum === 1 ? newData : [...prev, ...newData],
+        );
         setHasMore(meta.page < meta.pageCount);
         setLoadingMore(false);
       })
@@ -223,7 +286,7 @@ const Accueil = () => {
         title: t("home.alerts.success_title"),
         text: t("home.alerts.success_text"),
         confirmButtonColor: "#1a1c3d",
-        timer: 3500
+        timer: 3500,
       });
       setFormData({ Destination: "", nbr: 1, date: "", budget: "" });
     } catch {
@@ -269,21 +332,45 @@ const Accueil = () => {
                   <label>{t("home.hero.dest_label")}</label>
                   <div className="hero-input-wrap">
                     <MapPin size={16} />
-                    <input type="text" placeholder={t("home.hero.dest_placeholder")} value={formData.Destination} onChange={(e) => setFormData({ ...formData, Destination: e.target.value })} required />
+                    <input
+                      type="text"
+                      placeholder={t("home.hero.dest_placeholder")}
+                      value={formData.Destination}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          Destination: e.target.value,
+                        })
+                      }
+                      required
+                    />
                   </div>
                 </div>
                 <div className="hero-field">
                   <label>{t("home.hero.pax_label")}</label>
                   <div className="hero-input-wrap">
                     <Users size={16} />
-                    <input type="number" min="1" value={formData.nbr} onChange={(e) => setFormData({ ...formData, nbr: e.target.value })} />
+                    <input
+                      type="number"
+                      min="1"
+                      value={formData.nbr}
+                      onChange={(e) =>
+                        setFormData({ ...formData, nbr: e.target.value })
+                      }
+                    />
                   </div>
                 </div>
                 <div className="hero-field">
                   <label>{t("home.hero.date_label")}</label>
                   <div className="hero-input-wrap">
                     <Calendar size={16} />
-                    <input type="date" value={formData.date} onChange={(e) => setFormData({ ...formData, date: e.target.value })} />
+                    <input
+                      type="date"
+                      value={formData.date}
+                      onChange={(e) =>
+                        setFormData({ ...formData, date: e.target.value })
+                      }
+                    />
                   </div>
                 </div>
               </div>
@@ -292,11 +379,24 @@ const Accueil = () => {
                   <label>{t("home.hero.budget_label")}</label>
                   <div className="hero-input-wrap">
                     <Euro size={16} />
-                    <input type="number" placeholder="DZD" value={formData.budget} onChange={(e) => setFormData({ ...formData, budget: e.target.value })} />
+                    <input
+                      type="number"
+                      placeholder="DZD"
+                      value={formData.budget}
+                      onChange={(e) =>
+                        setFormData({ ...formData, budget: e.target.value })
+                      }
+                    />
                   </div>
                 </div>
-                <button type="submit" className="hero-submit" disabled={isSubmitting}>
-                  {isSubmitting ? t("home.hero.btn_loading") : t("home.hero.btn_send")}
+                <button
+                  type="submit"
+                  className="hero-submit"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting
+                    ? t("home.hero.btn_loading")
+                    : t("home.hero.btn_send")}
                 </button>
               </div>
             </form>
@@ -317,21 +417,37 @@ const Accueil = () => {
       <section className="destinations-section">
         <div className="destinations-container">
           <div className="destinations-header">
-            <span className="section-badge">{t("home.destinations.badge")}</span>
+            <span className="section-badge">
+              {t("home.destinations.badge")}
+            </span>
             <h2 className="section-title">{t("home.destinations.title")}</h2>
           </div>
-          
+
           <div className="destinations-grid">
             {destinations.map((dest) => (
-              <Link to={`/details/${dest.documentId}`} key={dest.id} className="destination-card">
+              <Link
+                to={`/details/${dest.documentId}`}
+                key={dest.id}
+                className="destination-card"
+              >
                 <div className="card-image">
-                  <img src={dest.image?.[0] ? `${STRAPI_URL}${dest.image[0].url}` : "https://via.placeholder.com/400"} alt={dest.name} />
+                  <img
+                    src={
+                      dest.image?.[0]
+                        ? `${STRAPI_URL}${dest.image[0].url}`
+                        : "https://via.placeholder.com/400"
+                    }
+                    alt={dest.name}
+                  />
                 </div>
                 <div className="card-content">
                   <h3>{dest.name}</h3>
                   <p>{dest.description?.substring(0, 85)}...</p>
                   <div className="card-footer">
-                    <span className="price">{dest.price?.toLocaleString()} {t("home.destinations.currency")}</span>
+                    <span className="price">
+                      {dest.price?.toLocaleString()}{" "}
+                      {t("home.destinations.currency")}
+                    </span>
                   </div>
                 </div>
               </Link>
@@ -340,8 +456,14 @@ const Accueil = () => {
 
           {hasMore && (
             <div className="voir-plus-wrapper">
-              <button className="voir-plus-btn" onClick={loadMore} disabled={loadingMore}>
-                {loadingMore ? t("home.destinations.loading") : t("home.destinations.load_more")}
+              <button
+                className="voir-plus-btn"
+                onClick={loadMore}
+                disabled={loadingMore}
+              >
+                {loadingMore
+                  ? t("home.destinations.loading")
+                  : t("home.destinations.load_more")}
               </button>
             </div>
           )}
@@ -353,10 +475,30 @@ const Accueil = () => {
           <div className="family-content">
             <h2 className="family-title">{t("home.promo.title")}</h2>
             <p>{t("home.promo.subtitle")}</p>
-            <button className="family-cta">{t("home.promo.cta")}</button>
+            <Link to="/nos-voyages-dz">
+              <button className="family-cta">{t("home.promo.cta")}</button>
+            </Link>
           </div>
-          <div className="family-image-wrapper">
-            <img src={Discount} alt="Promo" className="family-image" />
+
+          {/* Nouveau composant Scroll */}
+          <div className="family-scroll-wrapper">
+            <div className="family-scroll-track">
+              {/* Premier groupe de 4 images (grid 2x2) */}
+              <div className="family-grid">
+                <img src={Discount} alt="Promo 1" className="scroll-img" />
+                <img src={Discount} alt="Promo 2" className="scroll-img" />
+                <img src={Discount} alt="Promo 3" className="scroll-img" />
+                <img src={Discount} alt="Promo 4" className="scroll-img" />
+              </div>
+
+              {/* Deuxième groupe identique pour assurer la boucle fluide */}
+              <div className="family-grid" aria-hidden="true">
+                <img src={Discount} alt="Promo 1" className="scroll-img" />
+                <img src={Discount} alt="Promo 2" className="scroll-img" />
+                <img src={Discount} alt="Promo 3" className="scroll-img" />
+                <img src={Discount} alt="Promo 4" className="scroll-img" />
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -379,12 +521,14 @@ const Accueil = () => {
           </div>
           <div className="faq-list">
             {faqs.map((item, index) => (
-              <FAQItem 
-                key={index} 
-                question={item.q} 
+              <FAQItem
+                key={index}
+                question={item.q}
                 answer={item.a}
-                isOpen={openFAQIndex === index} 
-                onToggle={() => setOpenFAQIndex(openFAQIndex === index ? -1 : index)} 
+                isOpen={openFAQIndex === index}
+                onToggle={() =>
+                  setOpenFAQIndex(openFAQIndex === index ? -1 : index)
+                }
               />
             ))}
           </div>

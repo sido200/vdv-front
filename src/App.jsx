@@ -17,18 +17,20 @@ import Details from "./pages/Details/Details.jsx";
 import GoogleCallback from "./pages/Auth/GoogleCallback/GoogleCallback.jsx";
 import CompleteProfile from "./pages/CompleteProfile/CompleteProfile.jsx";
 import ScrollToTop from "./components/layout/ScrollToTop/ScrollToTop.jsx";
+import NosVoyagesDz from "./pages/NosVoyagesDz/NosVoyagesDz.jsx";
 
 function App() {
   return (
     <BrowserRouter>
       {/* On place ScrollToTop ici pour qu'il surveille la navigation */}
       <ScrollToTop />
-      
+
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Accueil />} />
           <Route path="/a-propos" element={<APropos />} />
           <Route path="/nos-voyages" element={<NosVoyages />} />
+          <Route path="/nos-voyages-dz" element={<NosVoyagesDz />} />
           <Route path="/voyage-personnalise" element={<VoyagePersonnalise />} />
           <Route path="/entreprise" element={<Entreprise />} />
           <Route path="/contact" element={<Contact />} />

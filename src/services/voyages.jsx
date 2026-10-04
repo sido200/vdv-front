@@ -3,9 +3,14 @@ import axios from "axios";
 axios.defaults.withCredentials = true;
 export const BASE_URL = import.meta.env.VITE_API_LINK;
 
-
 // On ajoute ?populate=* pour récupérer images, catégories et disponibilités
-export const GetVoyage = () => axios.get(`${BASE_URL}/voyages?populate=*`);
+export const GetVoyage = () =>
+  axios.get(`${BASE_URL}/voyages`, {
+    params: {
+      "filters[local][$eq]": false,
+      populate: "*",
+    },
+  });
 
 // Note : Pour un ID, on utilise généralement .get et non .post
 // Force le peuplement spécifique des catégories et de l'image
@@ -17,13 +22,13 @@ export const GetVoyageById = (id) => {
 export const GetVoyage2 = (page = 1, pageSize = 10) => {
   return axios.get(`${BASE_URL}/voyages`, {
     params: {
+      "filters[local][$eq]": false,
       "pagination[page]": page,
       "pagination[pageSize]": pageSize,
-      populate: "*", // Pour récupérer les images
+      populate: "*",
     },
   });
 };
-
 
 // Récupérer les réservations de l'utilisateur connecté
 export const GetUserReservations = async (userId, token) => {

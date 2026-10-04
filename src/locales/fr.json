@@ -3,6 +3,7 @@
     "home": "Accueil",
     "about": "À propos",
     "trips": "Nos voyages",
+    "local":"Voyages locaux",
     "customTrip": "Voyage personnalisé",
     "contact": "Contact",
     "Entreprise":"Entreprise"
@@ -192,7 +193,7 @@
       "currency": "DZD"
     },
     "promo": {
-      "title": "Des réductions exclusives \n pour les voyages en famille",
+      "title": "Voyagez en Algerie",
       "subtitle": "Profitez de tarifs préférentiels pour vos enfants et des activités adaptées.",
       "cta": "Découvrir les offres"
     },

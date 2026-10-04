@@ -3,6 +3,7 @@
     "home": "Home",
     "about": "About Us",
     "trips": "Our Trips",
+    "local":"Local trips",
     "customTrip": "Custom Trip",
     "contact": "Contact",
      "Entreprise":"Company"
@@ -192,7 +193,7 @@
       "currency": "DZD"
     },
     "promo": {
-      "title": "Exclusive discounts \n for family trips",
+      "title": "Travel to Algeria",
       "subtitle": "Enjoy preferential rates for your children and tailored activities.",
       "cta": "Discover offers"
     },

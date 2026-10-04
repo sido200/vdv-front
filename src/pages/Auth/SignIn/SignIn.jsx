@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import "./SignIn.css";
 import { FcGoogle } from "react-icons/fc";
 
-  const STRAPI_URL = "https://purple-womens-widely-subjects.trycloudflare.com";
+const STRAPI_URL = "http://localhost:1337";
 
 const Login = () => {
   const { t } = useTranslation();
@@ -17,7 +17,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  
+
   const [showPassword, setShowPassword] = useState(false);
   const [showForgot, setShowForgot] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
@@ -41,7 +41,7 @@ const Login = () => {
       setError(
         err.response?.data?.error?.message === "Invalid identifier or password"
           ? t("login.errors.invalid")
-          : t("login.errors.generic")
+          : t("login.errors.generic"),
       );
     } finally {
       setLoading(false);
@@ -136,9 +136,15 @@ const Login = () => {
             {loading ? t("login.buttons.loading") : t("login.buttons.submit")}
           </button>
 
-          <div className="separator"><span>{t("login.separator")}</span></div>
+          <div className="separator">
+            <span>{t("login.separator")}</span>
+          </div>
 
-          <button type="button" className="google-btn" onClick={handleGoogleLogin}>
+          <button
+            type="button"
+            className="google-btn"
+            onClick={handleGoogleLogin}
+          >
             <FcGoogle className="google-icon" />
             {t("login.buttons.google")}
           </button>
