@@ -1,7 +1,7 @@
 import { FaWhatsapp } from "react-icons/fa";
 import "./WhatsAppButton.css";
 
-const WHATSAPP_NUMBER = "213560221788"; // +213 560 22 17 88 (format international sans +)
+const WHATSAPP_NUMBER = "213560221104"; // 0560 22 11 04 (format international sans + ni 0)
 
 const WhatsAppButton = () => {
   const url = `https://wa.me/${WHATSAPP_NUMBER}`;

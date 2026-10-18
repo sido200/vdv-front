@@ -3,10 +3,13 @@ import { useTranslation } from "react-i18next";
 import Swal from "sweetalert2";
 import "./Entreprise.css";
 import { PostContactEntreprise } from "../../services/entreprise";
+import { normalizePhone } from "../../utils/phone";
 
 const Entreprise = () => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
+  // Numéro mal écrit : le message s'affiche sous le champ
+  const [phoneError, setPhoneError] = useState(false);
   const [formData, setFormData] = useState({
     nom: "",
     prenom: "",
@@ -22,15 +25,25 @@ const Entreprise = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (name === "telephone") setPhoneError(false);
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Téléphone obligatoire et bien écrit, email facultatif
+    const telephone = normalizePhone(formData.telephone);
+    if (!telephone) {
+      setPhoneError(true);
+      const field = e.target.elements.telephone;
+      field?.focus({ preventScroll: true });
+      field?.scrollIntoView({ block: "center", behavior: "smooth" });
+      return;
+    }
     setLoading(true);
 
     try {
-      await PostContactEntreprise(formData);
+      await PostContactEntreprise({ ...formData, telephone, email: formData.email.trim() || null });
 
       Swal.fire({
         icon: "success",
@@ -114,12 +127,18 @@ const Entreprise = () => {
 
           <div className="form-row">
             <div className="form-group">
-              <label>{t("entreprise.form.email")}</label>
-              <input type="email" name="email" value={formData.email} onChange={handleChange} required disabled={loading} />
+              <label htmlFor="ent-phone">{t("entreprise.form.phone")} *</label>
+              <input
+                id="ent-phone" type="tel" name="telephone" value={formData.telephone} onChange={handleChange}
+                onBlur={(e) => setPhoneError(Boolean(e.target.value) && !normalizePhone(e.target.value))}
+                placeholder={t("forms.phone_placeholder")} autoComplete="tel" inputMode="tel" required disabled={loading}
+                aria-invalid={phoneError} aria-describedby={phoneError ? "ent-phone-error" : undefined}
+              />
+              {phoneError && <p id="ent-phone-error" className="field-error">{t("forms.phone_invalid")}</p>}
             </div>
             <div className="form-group">
-              <label>{t("entreprise.form.phone")}</label>
-              <input type="tel" name="telephone" value={formData.telephone} onChange={handleChange} required disabled={loading} />
+              <label htmlFor="ent-email">{t("entreprise.form.email")} <span className="field-optional">({t("forms.optional")})</span></label>
+              <input id="ent-email" type="email" name="email" value={formData.email} onChange={handleChange} autoComplete="email" disabled={loading} />
             </div>
           </div>
 

@@ -4,23 +4,48 @@ import Swal from "sweetalert2";
 import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
 import "./Contact.css";
 import { PostContactB2B, PostContactB2C } from "../../services/contact";
+import { normalizePhone } from "../../utils/phone";
 
 const Contact = () => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("b2c");
   const [loading, setLoading] = useState(false);
+  // Numéro mal écrit : le message s'affiche sous le champ
+  const [phoneError, setPhoneError] = useState(false);
 
   const [b2cForm, setB2cForm] = useState({ name: "", email: "", phone: "", description: "" });
   const [b2bForm, setB2bForm] = useState({ company: "", name: "", email: "", phone: "", site: "", description: "" });
 
-  const handleB2CChange = (e) => setB2cForm({ ...b2cForm, [e.target.name]: e.target.value });
-  const handleB2BChange = (e) => setB2bForm({ ...b2bForm, [e.target.name]: e.target.value });
+  const handleB2CChange = (e) => {
+    if (e.target.name === "phone") setPhoneError(false);
+    setB2cForm({ ...b2cForm, [e.target.name]: e.target.value });
+  };
+  const handleB2BChange = (e) => {
+    if (e.target.name === "phone") setPhoneError(false);
+    setB2bForm({ ...b2bForm, [e.target.name]: e.target.value });
+  };
+  const checkPhone = (e) => setPhoneError(Boolean(e.target.value) && !normalizePhone(e.target.value));
+
+  // Téléphone obligatoire et bien écrit, email facultatif (envoyé seulement s'il est rempli)
+  const prepare = (form, e) => {
+    const phone = normalizePhone(form.phone);
+    if (!phone) {
+      setPhoneError(true);
+      const field = e.target.elements.phone;
+      field?.focus({ preventScroll: true });
+      field?.scrollIntoView({ block: "center", behavior: "smooth" });
+      return null;
+    }
+    return { ...form, phone, email: form.email.trim() || null };
+  };
 
   const onB2CSubmit = async (e) => {
     e.preventDefault();
+    const data = prepare(b2cForm, e);
+    if (!data) return;
     setLoading(true);
     try {
-      await PostContactB2C(b2cForm);
+      await PostContactB2C(data);
       Swal.fire({
         icon: 'success',
         title: t("contact.alerts.success_b2c_title"),
@@ -28,7 +53,7 @@ const Contact = () => {
         confirmButtonColor: '#1a1c3d',
       });
       setB2cForm({ name: "", email: "", phone: "", description: "" });
-    } catch (err) {
+    } catch {
       Swal.fire({
         icon: 'error',
         title: t("contact.alerts.error_title"),
@@ -41,9 +66,11 @@ const Contact = () => {
 
   const onB2BSubmit = async (e) => {
     e.preventDefault();
+    const data = prepare(b2bForm, e);
+    if (!data) return;
     setLoading(true);
     try {
-      await PostContactB2B(b2bForm);
+      await PostContactB2B(data);
       Swal.fire({
         icon: 'success',
         title: t("contact.alerts.success_b2b_title"),
@@ -51,7 +78,7 @@ const Contact = () => {
         confirmButtonColor: '#1a1c3d',
       });
       setB2bForm({ company: "", name: "", email: "", phone: "", site: "", description: "" });
-    } catch (err) {
+    } catch {
       Swal.fire({
         icon: 'error',
         title: t("contact.alerts.error_title"),
@@ -72,10 +99,10 @@ const Contact = () => {
       </div>
 
       <div className="contact-tabs">
-        <button className={`tab-btn ${activeTab === "b2c" ? "active" : ""}`} onClick={() => setActiveTab("b2c")}>
+        <button className={`tab-btn ${activeTab === "b2c" ? "active" : ""}`} onClick={() => { setActiveTab("b2c"); setPhoneError(false); }}>
           {t("contact.tabs.b2c")}
         </button>
-        <button className={`tab-btn ${activeTab === "b2b" ? "active" : ""}`} onClick={() => setActiveTab("b2b")}>
+        <button className={`tab-btn ${activeTab === "b2b" ? "active" : ""}`} onClick={() => { setActiveTab("b2b"); setPhoneError(false); }}>
           {t("contact.tabs.b2b")}
         </button>
         <div className={`tab-indicator ${activeTab}`}></div>
@@ -93,12 +120,13 @@ const Contact = () => {
                   <input type="text" name="name" value={b2cForm.name} onChange={handleB2CChange} placeholder={t("contact.form.placeholder_name")} required />
                 </div>
                 <div className="form-group">
-                  <label>Email</label>
-                  <input type="email" name="email" value={b2cForm.email} onChange={handleB2CChange} placeholder="votre@email.com" required />
+                  <label htmlFor="b2c-phone">{t("contact.form.label_phone")} *</label>
+                  <input id="b2c-phone" type="tel" name="phone" value={b2cForm.phone} onChange={handleB2CChange} onBlur={checkPhone} placeholder={t("forms.phone_placeholder")} autoComplete="tel" inputMode="tel" required aria-invalid={phoneError} aria-describedby={phoneError ? "b2c-phone-error" : undefined} />
+                  {phoneError && <p id="b2c-phone-error" className="field-error">{t("forms.phone_invalid")}</p>}
                 </div>
                 <div className="form-group">
-                  <label>{t("contact.form.label_phone")}</label>
-                  <input type="tel" name="phone" value={b2cForm.phone} onChange={handleB2CChange} placeholder="+213 ..." />
+                  <label htmlFor="b2c-email">Email <span className="field-optional">({t("forms.optional")})</span></label>
+                  <input id="b2c-email" type="email" name="email" value={b2cForm.email} onChange={handleB2CChange} placeholder="votre@email.com" autoComplete="email" />
                 </div>
                 <div className="form-group">
                   <label>{t("contact.form.label_message")}</label>
@@ -123,12 +151,13 @@ const Contact = () => {
                   <input type="text" name="name" value={b2bForm.name} onChange={handleB2BChange} placeholder={t("contact.form.placeholder_name")} required />
                 </div>
                 <div className="form-group">
-                  <label>{t("contact.form.label_email")}</label>
-                  <input type="email" name="email" value={b2bForm.email} onChange={handleB2BChange} placeholder="contact@company.com" required />
+                  <label htmlFor="b2b-phone">{t("contact.form.label_phone")} *</label>
+                  <input id="b2b-phone" type="tel" name="phone" value={b2bForm.phone} onChange={handleB2BChange} onBlur={checkPhone} placeholder={t("forms.phone_placeholder")} autoComplete="tel" inputMode="tel" required aria-invalid={phoneError} aria-describedby={phoneError ? "b2b-phone-error" : undefined} />
+                  {phoneError && <p id="b2b-phone-error" className="field-error">{t("forms.phone_invalid")}</p>}
                 </div>
                 <div className="form-group">
-                  <label>{t("contact.form.label_phone")}</label>
-                  <input type="tel" name="phone" value={b2bForm.phone} onChange={handleB2BChange} placeholder="+213 ..." required />
+                  <label htmlFor="b2b-email">{t("contact.form.label_email")} <span className="field-optional">({t("forms.optional")})</span></label>
+                  <input id="b2b-email" type="email" name="email" value={b2bForm.email} onChange={handleB2BChange} placeholder="contact@company.com" autoComplete="email" />
                 </div>
                 <div className="form-group">
                   <label>{t("contact.form.label_site")}</label>

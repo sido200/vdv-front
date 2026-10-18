@@ -3,6 +3,17 @@ import axios from "axios";
 axios.defaults.withCredentials = true;
 export const BASE_URL = import.meta.env.VITE_API_LINK;
 
+// Voyages en Algérie (nom + photo) pour la mosaïque de l'accueil
+export const GetLocalVoyages = () =>
+  axios.get(`${BASE_URL}/voyages`, {
+    params: {
+      "filters[local][$eq]": true,
+      "pagination[pageSize]": 50,
+      sort: "name:asc",
+      populate: "image",
+    },
+  });
+
 // On ajoute ?populate=* pour récupérer images, catégories et disponibilités
 export const GetVoyage = () =>
   axios.get(`${BASE_URL}/voyages`, {

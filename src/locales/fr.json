@@ -460,5 +460,10 @@
       "invalid": "Lien invalide ou expiré. Refaites une demande de réinitialisation.",
       "no_code": "Lien incomplet. Utilisez le lien reçu par email."
     }
+  },
+  "forms": {
+    "optional": "facultatif",
+    "phone_invalid": "Numéro invalide. Exemple : 0560 22 11 04, 021 37 17 05 ou +33 6 12 34 56 78.",
+    "phone_placeholder": "0560 22 11 04"
   }
 }

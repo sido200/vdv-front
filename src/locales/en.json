@@ -460,5 +460,10 @@
       "invalid": "Invalid or expired link. Please request a new reset.",
       "no_code": "Incomplete link. Use the link received by email."
     }
+  },
+  "forms": {
+    "optional": "optional",
+    "phone_invalid": "Invalid number. Example: 0560 22 11 04, 021 37 17 05 or +33 6 12 34 56 78.",
+    "phone_placeholder": "0560 22 11 04"
   }
 }

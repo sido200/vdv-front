@@ -13,10 +13,32 @@ import Discount3 from "../../assets/images/local (3).jpg";
 import Discount4 from "../../assets/images/local (4).jpg";
 
 // SERVICES
-import { GetVoyage2 } from "../../services/voyages";
+import { GetVoyage2, GetLocalVoyages } from "../../services/voyages";
 import { Perso } from "../../services/perso";
 
 const STRAPI_URL = import.meta.env.VITE_STRAPI_URL;
+
+// Affiché pendant le chargement (ou si l'API ne répond pas)
+const LOCAL_FALLBACK = [
+  { key: "taghit", name: "Taghit", src: Discount1, to: "/nos-voyages-dz" },
+  { key: "tamanrasset", name: "Tamanrasset", src: Discount2, to: "/nos-voyages-dz" },
+  { key: "ghardaia", name: "Ghardaïa", src: Discount3, to: "/nos-voyages-dz" },
+  { key: "djanet", name: "Djanet", src: Discount4, to: "/nos-voyages-dz" },
+];
+
+const toLocalCard = (v) => {
+  const img = v.image?.[0];
+  const url = img?.formats?.medium?.url || img?.formats?.small?.url || img?.url;
+  return { key: v.documentId, name: v.name?.trim(), src: url ? `${STRAPI_URL}${url}` : null, to: `/details/${v.documentId}` };
+};
+
+// Une carte de la mosaïque : photo + nom de la destination
+const LocalCard = ({ card, hidden }) => (
+  <Link to={card.to} className="scroll-card" tabIndex={hidden ? -1 : undefined}>
+    <img src={card.src} alt={hidden ? "" : card.name} className="scroll-img" loading="lazy" />
+    <span className="scroll-card-name">{card.name}</span>
+  </Link>
+);
 
 const SLIDES = [
   {
@@ -227,9 +249,20 @@ const Accueil = () => {
 
   const faqs = t("home.faq.items", { returnObjects: true }) || [];
 
+  const [localTrips, setLocalTrips] = useState(LOCAL_FALLBACK);
+
   useEffect(() => {
     fetchVoyages(1);
+    GetLocalVoyages()
+      .then((res) => {
+        const cards = res.data.data.map(toLocalCard).filter((c) => c.src);
+        if (cards.length) setLocalTrips(cards);
+      })
+      .catch((err) => console.error("Error fetching local voyages:", err));
   }, []);
+
+  // Nombre pair pour garder la grille 2 colonnes pleine
+  const mosaic = localTrips.length % 2 ? [...localTrips, localTrips[Math.floor(localTrips.length / 2)]] : localTrips;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -485,21 +518,20 @@ const Accueil = () => {
 
           {/* Nouveau composant Scroll */}
           <div className="family-scroll-wrapper">
-            <div className="family-scroll-track">
-              {/* Premier groupe de 4 images (grid 2x2) */}
+            {/* Vitesse constante : ~5 s par rangée de 2 destinations */}
+            <div className="family-scroll-track" style={{ animationDuration: `${(mosaic.length / 2) * 5}s` }}>
+              {/* Destinations en Algérie (grille 2 colonnes) */}
               <div className="family-grid">
-                <img src={Discount1} alt="Promo 1" className="scroll-img" />
-                <img src={Discount2} alt="Promo 2" className="scroll-img" />
-                <img src={Discount3} alt="Promo 3" className="scroll-img" />
-                <img src={Discount4} alt="Promo 4" className="scroll-img" />
+                {mosaic.map((card, i) => (
+                  <LocalCard key={`${card.key}-${i}`} card={card} />
+                ))}
               </div>
 
               {/* Deuxième groupe identique pour assurer la boucle fluide */}
               <div className="family-grid" aria-hidden="true">
-                <img src={Discount1} alt="Promo 1" className="scroll-img" />
-                <img src={Discount2} alt="Promo 2" className="scroll-img" />
-                <img src={Discount3} alt="Promo 3" className="scroll-img" />
-                <img src={Discount4} alt="Promo 4" className="scroll-img" />
+                {mosaic.map((card, i) => (
+                  <LocalCard key={`${card.key}-dup-${i}`} card={card} hidden />
+                ))}
               </div>
             </div>
           </div>
